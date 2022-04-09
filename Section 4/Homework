@@ -1,0 +1,21 @@
+
+myplot <- function(data,rows=1:10){
+  Data <- data[rows,,drop=F]
+  matplot(t(Data), type="b", pch=15:18, col=c(1:4,6))
+  legend("bottomleft", inset=0.01, legend=Players[rows], col=c(1:4,6), pch=15:18, horiz=F)
+}
+
+#FreeThrows
+myplot(FreeThrows)
+
+#FreeThrowAttempts
+myplot(FreeThrowAttempts)
+
+#1. Free Throw Attempts per game
+myplot(FreeThrowAttempts/Games)
+
+#2. Accuracy of FreeThrows
+myplot(FreeThrows/FreeThrowAttempts)
+
+#3. Player playing style (2 vs 3 points preference) excluding Free Throws
+myplot((Points-FreeThrows)/FieldGoals)
