@@ -1,0 +1,32 @@
+getwd()
+mov <- read.csv("Section6-Homework-Data.csv")
+
+head(mov)
+tail(mov)
+summary(mov)
+
+filt <- (mov$Genre == "action") | (mov$Genre == "adventure") | (mov$Genre == "animation") | (mov$Genre == "comedy") | (mov$Genre == "drama")
+filt2 <- (mov$Studio == "Buena Vista Studios") | (mov$Studio == "WB") | (mov$Studio == "Fox") | (mov$Studio == "Universal") | (mov$Studio =="Sony") | (mov$Studio =="Paramount Pictures")
+
+mov2 <- mov[filt & filt2,]
+
+summary(mov2)
+
+
+p <- ggplot(data=mov2, aes(x=Genre, y=Gross...US))
+p + geom_jitter(aes(colour=Studio, size=Budget...mill.)) + 
+  geom_boxplot(size=1.2, alpha=0.7, outlier.colour=NA) +
+  xlab("Genre") +
+  ylab("Gross % US") +
+  ggtitle("Domestic Gross % by Genre") +
+  theme(axis.title.x=element_text(colour="Blue", size=20),
+        axis.title.y=element_text(colour="Blue", size=20),
+        axis.text.x=element_text(size=10),
+        axis.text.y=element_text(size=10),
+        
+        legend.title=element_text(size=10),
+        legend.text=element_text(size=10),
+        
+        plot.title=element_text(size=30))
+
+p$labels$size = "Budget $M"
